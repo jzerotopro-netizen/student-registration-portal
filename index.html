@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GGU Student Registration</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo-area">
+      <img src="ggu_logo.jpeg" alt="GGU Logo" class="logo"/>
+    </div>
+    <div class="header-title">
+      <h1>Student Registration Portal</h1>
+      <p>Godavari Global University</p>
+    </div>
+    <!-- Hidden Admin Button (bottom-right circle) -->
+    <div class="admin-btn-wrap">
+      <button class="admin-circle-btn" onclick="openAdminLogin()" title="Admin"></button>
+    </div>
+  </header>
+
+  <!-- REGISTRATION FORM -->
+  <main class="main-container">
+    <div class="form-card">
+      <h2 class="form-title">Student Enrollment Form</h2>
+      <p class="form-subtitle">Fill in your details to register</p>
+
+      <form id="registrationForm" onsubmit="submitForm(event)">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name <span class="req">*</span></label>
+            <input type="text" id="fullName" placeholder="Enter your full name" required/>
+          </div>
+          <div class="form-group">
+            <label>PIN Number <span class="req">*</span></label>
+            <input type="text" id="pinNumber" placeholder="Enter PIN number" required/>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Department <span class="req">*</span></label>
+            <select id="department" required>
+              <option value="">-- Select Department --</option>
+              <option>Computer Science & Engineering</option>
+              <option>Electronics & Communication Engineering</option>
+              <option>Mechanical Engineering</option>
+              <option>Civil Engineering</option>
+              <option>Electrical Engineering</option>
+              <option>Information Technology</option>
+              <option>Business Administration</option>
+              <option>Commerce</option>
+              <option>Science</option>
+              <option>Arts & Humanities</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Year <span class="req">*</span></label>
+            <div class="toggle-group" id="yearGroup">
+              <button type="button" class="toggle-btn" onclick="selectToggle('year',1,this)">1st</button>
+              <button type="button" class="toggle-btn" onclick="selectToggle('year',2,this)">2nd</button>
+              <button type="button" class="toggle-btn" onclick="selectToggle('year',3,this)">3rd</button>
+              <button type="button" class="toggle-btn" onclick="selectToggle('year',4,this)">4th</button>
+            </div>
+            <input type="hidden" id="year"/>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Semester <span class="req">*</span></label>
+            <div class="toggle-group" id="semesterGroup">
+              <button type="button" class="toggle-btn" onclick="selectToggle('semester',1,this)">1</button>
+              <button type="button" class="toggle-btn" onclick="selectToggle('semester',2,this)">2</button>
+              <button type="button" class="toggle-btn" onclick="selectToggle('semester',3,this)">3</button>
+              <button type="button" class="toggle-btn" onclick="selectToggle('semester',4,this)">4</button>
+              <button type="button" class="toggle-btn" onclick="selectToggle('semester',5,this)">5</button>
+              <button type="button" class="toggle-btn" onclick="selectToggle('semester',6,this)">6</button>
+              <button type="button" class="toggle-btn" onclick="selectToggle('semester',7,this)">7</button>
+              <button type="button" class="toggle-btn" onclick="selectToggle('semester',8,this)">8</button>
+            </div>
+            <input type="hidden" id="semester"/>
+          </div>
+          <div class="form-group">
+            <label>Section <span class="req">*</span></label>
+            <div class="toggle-group" id="sectionGroup">
+              <button type="button" class="toggle-btn" onclick="selectToggle('section','A',this)">A</button>
+              <button type="button" class="toggle-btn" onclick="selectToggle('section','B',this)">B</button>
+              <button type="button" class="toggle-btn" onclick="selectToggle('section','C',this)">C</button>
+              <button type="button" class="toggle-btn" onclick="selectToggle('section','D',this)">D</button>
+              <button type="button" class="toggle-btn" onclick="selectToggle('section','E',this)">E</button>
+              <button type="button" class="toggle-btn" onclick="selectToggle('section','F',this)">F</button>
+              <button type="button" class="toggle-btn" onclick="selectToggle('section','G',this)">G</button>
+              <button type="button" class="toggle-btn" onclick="selectToggle('section','H',this)">H</button>
+            </div>
+            <input type="hidden" id="section"/>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group full-width">
+            <label>Email Address <span class="req">*</span></label>
+            <input type="email" id="email" placeholder="yourname@example.com" required/>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group full-width">
+            <label>Skills Interested In <span class="req">*</span></label>
+            <div class="skills-grid" id="skillsGrid">
+              <label class="skill-chip"><input type="checkbox" value="Web Development"/> Web Development</label>
+              <label class="skill-chip"><input type="checkbox" value="Data Science"/> Data Science</label>
+              <label class="skill-chip"><input type="checkbox" value="Machine Learning"/> Machine Learning</label>
+              <label class="skill-chip"><input type="checkbox" value="Cloud Computing"/> Cloud Computing</label>
+              <label class="skill-chip"><input type="checkbox" value="Cybersecurity"/> Cybersecurity</label>
+              <label class="skill-chip"><input type="checkbox" value="Mobile Development"/> Mobile Dev</label>
+              <label class="skill-chip"><input type="checkbox" value="UI/UX Design"/> UI/UX Design</label>
+              <label class="skill-chip"><input type="checkbox" value="DevOps"/> DevOps</label>
+              <label class="skill-chip"><input type="checkbox" value="Blockchain"/> Blockchain</label>
+              <label class="skill-chip"><input type="checkbox" value="IoT"/> IoT</label>
+              <label class="skill-chip"><input type="checkbox" value="AR/VR"/> AR/VR</label>
+              <label class="skill-chip"><input type="checkbox" value="Robotics"/> Robotics</label>
+            </div>
+          </div>
+        </div>
+
+        <div id="formMessage" class="form-message"></div>
+
+        <button type="submit" class="submit-btn">
+          <span>Register Now</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <!-- ADMIN LOGIN MODAL -->
+  <div id="adminLoginModal" class="modal-overlay" onclick="closeOnOverlay(event,'adminLoginModal')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('adminLoginModal')">✕</button>
+      <div class="modal-logo">
+        <img src="ggu_logo.jpeg" alt="GGU" style="height:50px;"/>
+      </div>
+      <h3>Admin Access</h3>
+      <p class="modal-sub">Enter password to continue</p>
+      <input type="password" id="adminPassword" placeholder="Password" class="modal-input" onkeydown="if(event.key==='Enter')verifyAdmin()"/>
+      <div id="adminError" class="admin-error"></div>
+      <button class="modal-btn" onclick="verifyAdmin()">Login</button>
+    </div>
+  </div>
+
+  <!-- ADMIN DASHBOARD MODAL -->
+  <div id="adminDashboard" class="modal-overlay" onclick="closeOnOverlay(event,'adminDashboard')">
+    <div class="modal-box dashboard-modal">
+      <button class="modal-close" onclick="closeModal('adminDashboard')">✕</button>
+      <div class="dashboard-header">
+        <img src="ggu_logo.jpeg" alt="GGU" style="height:40px;"/>
+        <div>
+          <h3>Admin Dashboard</h3>
+          <p id="studentCount" class="student-count">Loading...</p>
+        </div>
+        <div class="dash-filters">
+          <input type="text" id="searchInput" placeholder="🔍 Search..." oninput="filterStudents()" class="search-input"/>
+          <select id="filterDept" onchange="filterStudents()" class="filter-select">
+            <option value="">All Departments</option>
+            <option>Computer Science & Engineering</option>
+            <option>Electronics & Communication Engineering</option>
+            <option>Mechanical Engineering</option>
+            <option>Civil Engineering</option>
+            <option>Electrical Engineering</option>
+            <option>Information Technology</option>
+            <option>Business Administration</option>
+          </select>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="student-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Full Name</th>
+              <th>PIN</th>
+              <th>Department</th>
+              <th>Year</th>
+              <th>Sem</th>
+              <th>Section</th>
+              <th>Email</th>
+              <th>Skills</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="studentTableBody">
+            <tr><td colspan="10" class="loading-row">Loading students...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS TOAST -->
+  <div id="toast" class="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
