@@ -2,7 +2,7 @@
 //   GGU STUDENT PORTAL - app.js
 // ================================
 
-const API_BASE = 'http://localhost:8080/api';
+const API_BASE = 'http://192.168.1.15:8080/api';
 const ADMIN_PASSWORD = 'ggu@admin123';
 
 let allStudents = [];
